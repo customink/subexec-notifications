@@ -9,13 +9,26 @@ Read the full document documentation for [`ActiveSupport::Notifications`](http:/
 
 ```ruby
 ActiveSupport::Notifications.subscribe('subexec.run') do |*args|
-  Subscribers::SubexecLibrato.new(*args)
+  # Your code here
 end
 ```
 
+
+## Payload
+
 The payload for events return the `Subexec` instance via the `:sub` key as well as the hostname of the machine running the command via the `:hostname` key. For example:
 
+* `:sub` - Subexec object
+* `:hostname` - The hostname of the machine as reported by `Socket.gethostname`.
+
+
+## Full Example
+
 ```ruby
+ActiveSupport::Notifications.subscribe('subexec.run') do |*args|
+  Subscribers::SubexecLibrato.new(*args)
+end
+
 module Subscribers
   class SubexecLibrato < Base
 
@@ -29,7 +42,7 @@ module Subscribers
       duration = @event.duration
       command = sub.command.split.first
       source = @event.payload[:hostname]
-      Librato::Metrics.submit 'subexec:run' => {type: command, value: duration, source: source}
+      Librato::Metrics.submit 'subexec.run' => {type: command, value: duration, source: source}
     end
 
   end
