@@ -21,24 +21,21 @@ class Subexec
         event.payload.must_be_instance_of Hash
       end
 
-      describe 'event' do
-
-        it 'payload includes the Subexec object' do
-          subscribed { Subexec.run "echo 'Subexec Object'" }
-          sub = event.payload[:sub]
-          sub.must_be_instance_of   Subexec
-          sub.command.must_equal    "echo 'Subexec Object'"
-          sub.exitstatus.must_equal 0
-        end
-
-        it 'payload includes the hostname' do
-          Socket.stub :gethostname, 'vm22.bigcompany.com' do
-            subscribed { Subexec.run "echo 'Important Work'" }
-            event.payload[:hostname].must_equal 'vm22.bigcompany.com'
-          end
-        end
-
+      it 'payload includes the Subexec object' do
+        subscribed { Subexec.run "echo 'Subexec Object'" }
+        sub = event.payload[:sub]
+        sub.must_be_instance_of   Subexec
+        sub.command.must_equal    "echo 'Subexec Object'"
+        sub.exitstatus.must_equal 0
       end
+
+      it 'payload includes the hostname' do
+        Socket.stub :gethostname, 'vm22.bigcompany.com' do
+          subscribed { Subexec.run "echo 'Important Work'" }
+          event.payload[:hostname].must_equal 'vm22.bigcompany.com'
+        end
+      end
+
 
     end
   end

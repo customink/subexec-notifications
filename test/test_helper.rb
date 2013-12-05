@@ -8,7 +8,7 @@ class Subexec
   module Notifications
     class TestCase < MiniTest::Spec
 
-      let(:callback) { lambda { |*args| event(*args) } }
+      let(:callback)  { lambda { |*args| event(*args) } }
 
       after do
         clear_event!
@@ -18,7 +18,10 @@ class Subexec
       private
 
       def subscribed(name="subexec.run")
-        ActiveSupport::Notifications.subscribed(callback, name) { yield }
+        subscriber = ActiveSupport::Notifications.subscribe(name, &callback)
+        yield
+      ensure
+        ActiveSupport::Notifications.unsubscribe(subscriber)
       end
 
       def event(*args)
