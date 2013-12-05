@@ -1,7 +1,46 @@
 
 # Subexec::Notifications
 
-Instrumentation For Subexec Commands Using ActiveSupport::Notifications.
+Instrumentation for [`Subexec`](https://github.com/nulayer/subexec) commands using `ActiveSupport::Notifications`.
+
+
+## Usage
+
+Read the full document documentation for [`ActiveSupport::Notifications`](http://apidock.com/rails/ActiveSupport/Notifications) first. All `Subexec` events can be subscribed to using the `subexec.run` key.
+
+```ruby
+ActiveSupport::Notifications.subscribe('subexec.run') do |*args|
+  Subscribers::SubexecLibrato.new(*args)
+end
+```
+
+The payload for events return the `Subexec` instance via the `:sub` key as well as the hostname of the machine running the command via the `:hostname` key. For example:
+
+```ruby
+module Subscribers
+  class SubexecLibrato < Base
+
+    def initialize(*args)
+      @event = ActiveSupport::Notifications::Event.new(*args)
+      process
+    end
+
+    def process
+      sub = @event.payload[:sub]
+      duration = @event.duration
+      command = sub.command.split.first
+      source = @event.payload[:hostname]
+      Librato::Metrics.submit 'subexec:run' => {type: command, value: duration, source: source}
+    end
+
+  end
+end
+```
+
+
+## Learn More
+
+* [Digging Deep with ActiveSupport::Notifications](https://speakerdeck.com/nextmat/digging-deep-with-activesupportnotifications)
 
 
 ## Contributing
