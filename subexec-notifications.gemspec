@@ -1,4 +1,3 @@
-# coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'subexec/notifications/version'
@@ -21,5 +20,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'guard-minitest'
   spec.add_development_dependency 'rake'
 end
