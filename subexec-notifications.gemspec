@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = Subexec::Notifications::VERSION
   spec.authors       = ['Ken Collins']
   spec.email         = ['ken@metaskills.net']
-  spec.summary       = 'Instrumentation For Subexec Commands Using ActiveSupport::Notifications'
+  spec.summary       = 'Instrumentation for Subexec commands using ActiveSupport::Notifications'
   spec.description   = spec.summary
   spec.homepage      = 'http://github.com/customink/subexec-notifications'
   spec.license       = 'MIT'
