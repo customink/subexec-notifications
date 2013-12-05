@@ -1,4 +1,3 @@
-
 # Subexec::Notifications
 
 Instrumentation for [`Subexec`](https://github.com/nulayer/subexec) commands using `ActiveSupport::Notifications`.
@@ -63,4 +62,3 @@ $ bundle exec rake appraisal:v32 test
 
 Our current build status is:
 [![Build Status](https://secure.travis-ci.org/customink/subexec-notifications.png)](http://travis-ci.org/customink/subexec-notifications)
-
