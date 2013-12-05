@@ -61,4 +61,4 @@ $ bundle exec rake appraisal:v32 test
 ```
 
 Our current build status is:
-[![Build Status](https://secure.travis-ci.org/customink/subexec-notifications.png)](http://travis-ci.org/customink/subexec-notifications)
+[![Build Status](https://travis-ci.org/customink/subexec-notifications.png?branch=master)](https://travis-ci.org/customink/subexec-notifications)
