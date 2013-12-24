@@ -52,6 +52,7 @@ end
 
 ## Learn More
 
+* [Instrumenting Your Code With ActiveSupport Notifications](http://technology.customink.com/blog/2013/12/19/instrumenting-your-code-with-activesupport-notifications/)
 * [Digging Deep with ActiveSupport::Notifications](https://speakerdeck.com/nextmat/digging-deep-with-activesupportnotifications)
 
 
